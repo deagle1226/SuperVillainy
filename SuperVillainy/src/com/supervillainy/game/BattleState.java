@@ -15,6 +15,15 @@ import com.supervillainy.game.entity.RockEnemy;
 import com.supervillainy.game.gui.BitmapFont;
 import com.supervillainy.game.model.ObjLoader;
 import com.supervillainy.game.model.ObjModel;
+import com.supervillainy.game.powers.ActivePower;
+import com.supervillainy.game.powers.MagicShot;
+import com.supervillainy.game.powers.MutationShot;
+import com.supervillainy.game.powers.NaturalShot;
+import com.supervillainy.game.powers.PassivePower;
+import com.supervillainy.game.powers.Power;
+import com.supervillainy.game.powers.ShootPower;
+import com.supervillainy.game.powers.SpeedPassive;
+import com.supervillainy.game.powers.TechShot;
 import com.supervillainy.game.sound.Sound;
 import com.supervillainy.game.sound.SoundLoader;
 import com.supervillainy.game.texture.Texture;
@@ -132,6 +141,16 @@ public class BattleState implements GameState, EntityManager {
 		font = new BitmapFont(fontTexture, 32, 32);
 		
 		shoot = SoundLoader.get().getOgg("res/hit.ogg");
+		
+		PowerState.powers.add(new NaturalShot());
+		PowerState.powers.add(new MagicShot());
+		PowerState.powers.add(new MutationShot());
+		PowerState.powers.add(new TechShot());
+		PowerState.powers.add(new SpeedPassive());
+		
+		for (Power p : PowerState.powers){
+			p.init(loader);
+		}
 	}
 
 	@Override
@@ -242,6 +261,12 @@ public class BattleState implements GameState, EntityManager {
 		for (Entity e : entities) {
 			e.update(this, delta);
 		}
+		for (Power p : PowerState.powers){
+			p.update(this, delta);
+			if (p instanceof PassivePower){
+				p.effect(this, delta);
+			}
+		}
 	}
 
 	@Override
@@ -261,6 +286,12 @@ public class BattleState implements GameState, EntityManager {
 		ScoreState.score = 0;
 		level = 5;
 		gameOver = false;
+		
+		for (Power p : PowerState.powers){
+			if (p instanceof ActivePower){
+				((ActivePower) p).setPlayer(player);
+			}
+		}
 
 	}
 

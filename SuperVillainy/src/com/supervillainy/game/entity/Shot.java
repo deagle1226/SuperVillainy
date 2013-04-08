@@ -36,26 +36,16 @@ public class Shot extends EffectEntity implements Entity {
 	 *            The y component of the initial velocity of the shot
 	 */
 	public Shot(Texture texture, float x, float y, float vx, float vy) {
+		this(texture, x, y, vx, vy, 1f, 0f, 0f);
+	}
+	
+	public Shot(Texture texture, float x, float y, float vx, float vy, float r, float g, float b){
 		positionX = x;
 		positionY = y;
 		velocityX = vx;
 		velocityY = vy;
 		this.texture = texture;
-
-		switch (PowerState.state) {
-		case 0:
-			particles = new ParticleGroup(100, 200, 1, 0, 0);
-			break;
-		case 1:
-			particles = new ParticleGroup(100, 200, 0, 1, 0);
-			break;
-		case 2:
-			particles = new ParticleGroup(100, 200, 0, 0, 1);
-			break;
-		case 3:
-			particles = new ParticleGroup(100, 200, 0, 1, 1);
-			break;
-		}
+		particles = new ParticleGroup(100, 200, r, g, b);
 	}
 
 	/**

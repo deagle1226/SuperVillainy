@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.gui.BitmapFont;
+import com.supervillainy.game.powers.Power;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;
 
@@ -20,7 +21,10 @@ public class PowerSelectMenu extends MenuGameState {
 
 	@Override
 	public void init(GameWindow window) throws IOException {
-		options = PowerState.powers;
+		options = new String[PowerState.powers.size()];
+		for (int i = 0; i < PowerState.powers.size(); i++){
+			options[i] = PowerState.powers.get(i).getName();
+		}
 		
 		bgPath = "res/bg.jpg";
 		fontPath = "res/font.png";
@@ -44,15 +48,7 @@ public class PowerSelectMenu extends MenuGameState {
 	@Override 
 	public void selectOption(GameWindow window) {
 		if (Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
-			if (selected == PowerState.TECH) {
-				PowerState.setState(PowerState.TECH);
-			} else if (selected == PowerState.MUTATION) {
-				PowerState.setState(PowerState.MUTATION);
-			} else if (selected == PowerState.MAGIC) {
-				PowerState.setState(PowerState.MAGIC);
-			} else if (selected == PowerState.NATURAL) {
-				PowerState.setState(PowerState.NATURAL);
-			}
+			PowerState.selected = PowerState.powers.get(selected);
 			window.changeToState(BattleState.NAME);
 		}
 	}

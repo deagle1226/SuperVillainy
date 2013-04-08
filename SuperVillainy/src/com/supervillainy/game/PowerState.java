@@ -1,20 +1,13 @@
 package com.supervillainy.game;
 
-public class PowerState {
+import java.util.ArrayList;
 
-	public static final int TECH = 0;
-	public static final int MUTATION = 1;
-	public static final int MAGIC = 2;
-	public static final int NATURAL = 3;
+import com.supervillainy.game.powers.Power;
+
+public class PowerState {
 	
-	public static final String[] powers = new String[] {
-		"Technology", "Mutation", "Magic", "Natural Training"
-	};
+	public static ArrayList<Power> powers = new ArrayList<Power>();
 	
-	public static int state = 0;
-	
-	public static void setState(int s) {
-		state = s;
-	}
+	public static Power selected;
 	
 }

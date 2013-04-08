@@ -4,15 +4,17 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.supervillainy.game.BattleState;
 import com.supervillainy.game.GameWindow;
 import com.supervillainy.game.PowerState;
 import com.supervillainy.game.ScoreState;
 import com.supervillainy.game.model.ObjModel;
+import com.supervillainy.game.powers.ActivePower;
 import com.supervillainy.game.texture.Texture;
 
 public class Player extends AbstractEntity {
 	
-	public final static int SPEED = 10;
+	public static int SPEED = 10;
 	public final static float SCALE = 0.02f;
 	public final static int SHOT_SPEED = 30;
 	
@@ -22,9 +24,9 @@ public class Player extends AbstractEntity {
 	private ObjModel model;
 	
 	/** The X component of the forward vector - used to place shots */
-	private float forwardX = 0;
+	public float forwardX = 0;
 	/** The Y component of the forward vector - used to place shots */
-	private float forwardY = 1;
+	public float forwardY = 1;
 	
 	/** The timeout that counts down until the player can shoot again */
 	private int shotTimeout;
@@ -54,7 +56,7 @@ public class Player extends AbstractEntity {
 							 forwardY * SHOT_SPEED);
 		
 		manager.addEntity(shot);
-		if (ScoreState.score >= 10 || PowerState.state == 3) {
+		if (ScoreState.score >= 10) {
 			shot = new Shot(shotTexture, 
 					 getX() + forwardX, 
 					 getY() + forwardY, 
@@ -118,8 +120,12 @@ public class Player extends AbstractEntity {
 		shotTimeout -= delta;
 		if (shotTimeout <= 0){
 			if (Mouse.isButtonDown(0)){
-				fire(manager);
+				//fire(manager);
 				shotTimeout = shotInterval;
+				if (PowerState.selected instanceof ActivePower){
+					PowerState.selected.effect(manager, delta);
+				}
+				
 			}
 		}
 		
