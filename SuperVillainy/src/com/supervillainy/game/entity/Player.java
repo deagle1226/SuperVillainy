@@ -5,6 +5,8 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.GameWindow;
+import com.supervillainy.game.PowerState;
+import com.supervillainy.game.ScoreState;
 import com.supervillainy.game.model.ObjModel;
 import com.supervillainy.game.texture.Texture;
 
@@ -12,6 +14,7 @@ public class Player extends AbstractEntity {
 	
 	public final static int SPEED = 10;
 	public final static float SCALE = 0.02f;
+	public final static int SHOT_SPEED = 30;
 	
 	/** The texture to apply to the model */
 	private Texture texture;
@@ -31,6 +34,9 @@ public class Player extends AbstractEntity {
 	/** The texture applied to the particles that build up the player's shots */
 	private Texture shotTexture;
 	
+	private float defl1 = 0.3f;
+	private float defl2 = (float) (Math.PI*2 - defl1);
+	
 	public Player(Texture texture, ObjModel model, Texture shotTexture) {
 		this.texture = texture;
 		this.model = model;
@@ -44,13 +50,24 @@ public class Player extends AbstractEntity {
 		Shot shot = new Shot(shotTexture, 
 							 getX() + forwardX, 
 							 getY() + forwardY, 
-							 forwardX * 30, 
-							 forwardY * 30);
+							 forwardX * SHOT_SPEED, 
+							 forwardY * SHOT_SPEED);
 		
-		// add the entity to the game and notify it that a 
-		// shot has been fired (just in case it needs to do 
-		// anything)
 		manager.addEntity(shot);
+		if (ScoreState.score >= 10 || PowerState.state == 3) {
+			shot = new Shot(shotTexture, 
+					 getX() + forwardX, 
+					 getY() + forwardY, 
+					 (float) ((forwardX*Math.cos(defl1) - forwardY*Math.sin(defl1)) * SHOT_SPEED), 
+					 (float) ((forwardX*Math.sin(defl1) + forwardY*Math.cos(defl1)) * SHOT_SPEED));
+			manager.addEntity(shot);
+			shot = new Shot(shotTexture, 
+					 getX() + forwardX, 
+					 getY() + forwardY, 
+					 (float) ((forwardX*Math.cos(defl2) - forwardY*Math.sin(defl2)) * SHOT_SPEED), 
+					 (float) ((forwardX*Math.sin(defl2) + forwardY*Math.cos(defl2)) * SHOT_SPEED));
+			manager.addEntity(shot);
+		}
 		manager.shotFired();
 	}
 	
@@ -77,9 +94,11 @@ public class Player extends AbstractEntity {
 			velocityX = SPEED;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)){
 			velocityX = -SPEED;
-		}
-		 else {
+		} else {
 			velocityX = 0;
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
+			System.exit(0);
 		}
 	}
 	
@@ -151,7 +170,6 @@ public class Player extends AbstractEntity {
 	@Override
 	public void collide(EntityManager manager, Entity other) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

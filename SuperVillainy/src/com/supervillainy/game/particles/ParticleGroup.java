@@ -66,6 +66,7 @@ public class ParticleGroup {
 					       (g * (1 - scalar)) + scalar,
 						   (b * (1 - scalar)) + scalar,
 						       alpha[i]);
+//				GL11.glColor4f(r, g, b, alpha[i]);
 				
 				GL11.glTexCoord2f(0,0);
 				GL11.glVertex3f(pos[i][0]-size[i],pos[i][1]-size[i],-0.3f);

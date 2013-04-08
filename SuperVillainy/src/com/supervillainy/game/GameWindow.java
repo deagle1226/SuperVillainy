@@ -20,6 +20,7 @@ public class GameWindow {
 	public final static int WINDOW_HEIGHT = 720;
 	public final static int WINDOW_RATIO = 17;
 	public final static int FRAME_CAP = 60;
+	public final static float FIELD_OF_VIEW = 45.0f;
 	
 	private HashMap gameStates = new HashMap();
 	private GameState currentState;
@@ -43,7 +44,7 @@ public class GameWindow {
 			Display.setDisplayMode(mode);
 			Display.setFullscreen(false);
 			
-			Display.create(new PixelFormat(8,0,0,8));
+			Display.create(new PixelFormat(8,0,0,16));
 			
 			// initialise the game states
 			init();
@@ -139,15 +140,16 @@ public class GameWindow {
 		// define the properties for the perspective of the scene
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();		
-		GLU.gluPerspective(45.0f, ((float) WINDOW_WIDTH) / ((float) WINDOW_HEIGHT), 0.1f, 100.0f);
+		GLU.gluPerspective(FIELD_OF_VIEW, ((float) WINDOW_WIDTH) / ((float) WINDOW_HEIGHT), 0.1f, 100.0f);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glHint(GL11.GL_PERSPECTIVE_CORRECTION_HINT, GL11.GL_NICEST); 
 
 		// add the two game states that build up our game, the menu
 		// state allows starting of the game. The ingame state rendered
 		// the asteroids and the player
-		//addState(new MenuState());
-		addState(new BattleState());
+		addState(new StartMenu());
+		addState(new PowerSelectMenu());
+		addState(new BattleState(20));
 		
 		try {
 			// initialse all the game states we've just created. This allows

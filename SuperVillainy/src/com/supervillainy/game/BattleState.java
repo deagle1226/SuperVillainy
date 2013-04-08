@@ -53,8 +53,6 @@ public class BattleState implements GameState, EntityManager {
 	/** The OpenGL material properties applied to everything in the game */
 	private FloatBuffer material;
 	
-	/** The current score */
-	private int score;
 	/** The number of lifes left */
 	private int life = 4;
 	/** True if the game is over */
@@ -68,10 +66,13 @@ public class BattleState implements GameState, EntityManager {
 	/** The timeout for the game over message before resetting to the menu */
 	private int gameOverTimeout;
 	
+	private int num_enenmies;
+	
 	/**
 	 * Create a new game state
 	 */
-	public BattleState() {
+	public BattleState(int n) {
+		num_enenmies = n;
 	}
 
 	@Override
@@ -168,7 +169,7 @@ public class BattleState implements GameState, EntityManager {
 		window.enterOrtho();
 		
 		GL11.glColor3f(1,1,0);
-		font.drawString(1, "SCORE:" + score, 5, 5);
+		font.drawString(1, "SCORE:" + ScoreState.score, 5, 5);
 		
 		GL11.glColor3f(1,0,0);
 		String lifeString = "";
@@ -251,16 +252,16 @@ public class BattleState implements GameState, EntityManager {
 		entities.add(player);
 		
 		Enemy enemy;
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < num_enenmies; i++) {
 			enemy = new RockEnemy(rockTexture, rockModel, i*2, 10);
 			entities.add(enemy);
 		}
 		
 		life = 4;
-		score = 0;
+		ScoreState.score = 0;
 		level = 5;
 		gameOver = false;
-		
+
 	}
 
 	@Override
@@ -279,7 +280,7 @@ public class BattleState implements GameState, EntityManager {
 
 	@Override
 	public void enemyKilled() {
-		score++;
+		ScoreState.score++;
 	}
 
 	@Override
