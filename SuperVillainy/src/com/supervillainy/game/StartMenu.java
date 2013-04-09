@@ -12,8 +12,10 @@ import com.supervillainy.game.texture.TextureLoader;
 public class StartMenu extends MenuGameState {
 	
 	public static final String NAME = "start_menu";
-	private int START = 0;
-	private int EXIT = 1;
+	private int START = 2;
+	private int EXIT = 3;
+	private int TEST1 = 0;
+	private int TEST2 = 1;
 
 	@Override
 	public String getName() {
@@ -22,7 +24,7 @@ public class StartMenu extends MenuGameState {
 
 	@Override
 	public void init(GameWindow window) throws IOException {
-		options = new String[] {"Start Game", "Exit"};
+		options = new String[] {"DEBUG_AI", "DEBUG_Battle", "Start Game", "Exit"};
 
 		bgPath = "res/bg.jpg";
 		fontPath = "res/font.png";
@@ -50,7 +52,13 @@ public class StartMenu extends MenuGameState {
 				window.changeToState(PowerSelectMenu.NAME);
 			} else if (selected == EXIT) {
 				System.exit(0);
+			} else if (selected == TEST1){
+				window.changeToState(HiveState.NAME);
+			} else if (selected == TEST2){
+				window.changeToState(PowerSelectMenu.NAME);
 			}
+		} else if (Keyboard.getEventKey() == Keyboard.KEY_ESCAPE){
+			System.exit(0);
 		}
 	}
 

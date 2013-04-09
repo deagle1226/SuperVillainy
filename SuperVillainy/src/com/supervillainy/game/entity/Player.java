@@ -8,6 +8,7 @@ import com.supervillainy.game.BattleState;
 import com.supervillainy.game.GameWindow;
 import com.supervillainy.game.PowerState;
 import com.supervillainy.game.ScoreState;
+import com.supervillainy.game.StartMenu;
 import com.supervillainy.game.model.ObjModel;
 import com.supervillainy.game.powers.ActivePower;
 import com.supervillainy.game.texture.Texture;
@@ -98,9 +99,6 @@ public class Player extends AbstractEntity {
 			velocityX = -SPEED;
 		} else {
 			velocityX = 0;
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			System.exit(0);
 		}
 	}
 	

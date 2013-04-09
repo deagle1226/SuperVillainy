@@ -150,6 +150,7 @@ public class GameWindow {
 		addState(new StartMenu());
 		addState(new PowerSelectMenu());
 		addState(new BattleState(20));
+		addState(new HiveState());
 		
 		try {
 			// initialse all the game states we've just created. This allows

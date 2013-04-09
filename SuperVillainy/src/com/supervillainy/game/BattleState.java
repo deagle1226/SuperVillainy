@@ -5,6 +5,7 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.entity.Enemy;
@@ -231,6 +232,9 @@ public class BattleState implements GameState, EntityManager {
 
 	@Override
 	public void update(GameWindow window, int delta) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
+			window.changeToState(StartMenu.NAME);
+		}
 		if (gameOver) {
 			gameOverTimeout -= delta;
 			if (gameOverTimeout < 0) {
