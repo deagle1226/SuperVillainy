@@ -1,4 +1,7 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.commands;
+
+import com.supervillainy.game.ai.tasks.BattleTask;
+import com.supervillainy.game.ai.tasks.Task;
 
 public class BattleCommand extends Command {
 	

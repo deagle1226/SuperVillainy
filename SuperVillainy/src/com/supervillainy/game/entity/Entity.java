@@ -4,8 +4,6 @@ package com.supervillainy.game.entity;
  * The interface describing the entities that appear in the game. This 
  * defines the contract between the elements building up the game (player,
  * rocks, shots) and the class containing them (i.e. the game)
- * 
- * @author Kevin Glass
  */
 public interface Entity {
 	/**

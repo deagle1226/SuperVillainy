@@ -1,4 +1,4 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.minions;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

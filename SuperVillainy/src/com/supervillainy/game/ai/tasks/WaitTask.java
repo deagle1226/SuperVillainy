@@ -1,17 +1,17 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.tasks;
 
-public class WalkTask implements Task {
+public class WaitTask implements Task {
 	
-	public static final String NAME = "Walking";
+	public static final String NAME = "Waiting";
 	
-	private int count = 0;
+	private int count;
 	
 	private boolean active = true;
 
 	@Override
 	public void update() {
 		count++;
-		if(count > 300){
+		if (count < 5){
 			active = false;
 		}
 	}

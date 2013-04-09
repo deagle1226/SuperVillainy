@@ -1,4 +1,4 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.tasks;
 
 public class BattleTask implements Task {
 	

@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.supervillainy.game.ai.BattleCommand;
 import com.supervillainy.game.ai.CommandQueue;
-import com.supervillainy.game.ai.Goon;
-import com.supervillainy.game.ai.MinionManager;
-import com.supervillainy.game.ai.WalkCommand;
+import com.supervillainy.game.ai.commands.BattleCommand;
+import com.supervillainy.game.ai.commands.WalkCommand;
+import com.supervillainy.game.ai.minions.Goon;
+import com.supervillainy.game.ai.minions.MinionManager;
 import com.supervillainy.game.gui.BitmapFont;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;

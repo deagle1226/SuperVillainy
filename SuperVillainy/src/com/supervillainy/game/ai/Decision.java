@@ -1,5 +1,9 @@
 package com.supervillainy.game.ai;
 
+import com.supervillainy.game.ai.commands.Command;
+import com.supervillainy.game.ai.tasks.Task;
+import com.supervillainy.game.ai.tasks.WaitTask;
+
 public class Decision {
 	
 	public Task task;

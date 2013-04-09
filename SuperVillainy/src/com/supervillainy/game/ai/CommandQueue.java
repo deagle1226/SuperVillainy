@@ -3,6 +3,8 @@ package com.supervillainy.game.ai;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import com.supervillainy.game.ai.commands.Command;
+
 public class CommandQueue {
 	
 	public static PriorityQueue<Command> commands;

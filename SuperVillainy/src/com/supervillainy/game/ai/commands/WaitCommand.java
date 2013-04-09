@@ -1,4 +1,7 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.commands;
+
+import com.supervillainy.game.ai.tasks.Task;
+import com.supervillainy.game.ai.tasks.WaitTask;
 
 public class WaitCommand extends Command {
 	

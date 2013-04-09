@@ -1,4 +1,7 @@
-package com.supervillainy.game.ai;
+package com.supervillainy.game.ai.minions;
+
+import com.supervillainy.game.ai.AI;
+import com.supervillainy.game.ai.Decision;
 
 public abstract class Minion implements AI, Comparable<Minion> {
 	
