@@ -16,5 +16,9 @@ public abstract class Minion implements AI, Comparable<Minion> {
 	public int compareTo(Minion m) {
 		return Double.compare(rank, m.rank);
 	}
+	
+	public String toString() {
+		return this.getClass().getSimpleName() + " is " + decision.task.getName();
+	}
 
 }

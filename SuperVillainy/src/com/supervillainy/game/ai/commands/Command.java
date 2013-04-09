@@ -16,4 +16,8 @@ public abstract class Command implements Comparable<Command> {
 		return importance;
 	}
 	
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
+	
 }

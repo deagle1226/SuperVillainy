@@ -7,8 +7,10 @@ import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.ai.CommandQueue;
 import com.supervillainy.game.ai.commands.BattleCommand;
+import com.supervillainy.game.ai.commands.Command;
 import com.supervillainy.game.ai.commands.WalkCommand;
 import com.supervillainy.game.ai.minions.Goon;
+import com.supervillainy.game.ai.minions.Minion;
 import com.supervillainy.game.ai.minions.MinionManager;
 import com.supervillainy.game.gui.BitmapFont;
 import com.supervillainy.game.texture.Texture;
@@ -57,7 +59,18 @@ public class HiveState implements GameState {
 
 		GL11.glColor3f(1f,1f,1f);
 
-		//DRAW HERE
+		int i = 0;
+		for (Minion m : manager.getMinions()){
+			GL11.glColor3f(0.5f,0.5f,0);
+			font.drawString(0, i + " " + m.toString(), GameWindow.WINDOW_WIDTH/2-200, GameWindow.WINDOW_HEIGHT/2-300+(i*50));
+			i++;
+		}
+		i = 0;
+		for (Command c : commands.commands) {
+			GL11.glColor3f(0.5f,0.5f,0);
+			font.drawString(0, i + " " + c.toString(), GameWindow.WINDOW_WIDTH/2-200, GameWindow.WINDOW_HEIGHT/2+(i*50));
+			i++;
+		}
 		
 		window.leaveOrtho();
 	}

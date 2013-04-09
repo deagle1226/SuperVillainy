@@ -23,17 +23,11 @@ public class MinionManager {
 		count++;
 		if (count > 60){
 			count = 0;
-			print();
 		}
 	}
 	
-	public void print() {
-		int i = 0;
-		for (Minion m : minions){
-			System.out.println("Goon " + i + " is " + m.decision.task.getName());
-			i++;
-		}
-		System.out.println("-------------------");
+	public PriorityQueue<Minion> getMinions(){
+		return minions;
 	}
 
 }
