@@ -16,7 +16,7 @@ import com.supervillainy.game.texture.Texture;
 public class Player extends AbstractEntity {
 	
 	public static int SPEED = 10;
-	public final static float SCALE = 0.02f;
+	public final static float SCALE = 3.0f;
 	public final static int SHOT_SPEED = 30;
 	
 	/** The texture to apply to the model */
@@ -28,11 +28,6 @@ public class Player extends AbstractEntity {
 	public float forwardX = 0;
 	/** The Y component of the forward vector - used to place shots */
 	public float forwardY = 1;
-	
-	/** The timeout that counts down until the player can shoot again */
-	private int shotTimeout;
-	/** The interval in milliseconds between player shots */
-	private int shotInterval = 250;
 	
 	/** The texture applied to the particles that build up the player's shots */
 	private Texture shotTexture;
@@ -46,32 +41,6 @@ public class Player extends AbstractEntity {
 		this.shotTexture = shotTexture;
 		positionX = 0;
 		positionY = 0;
-	}
-	
-	private void fire(EntityManager manager){
-		// create a new shot based on our current settings
-		Shot shot = new Shot(shotTexture, 
-							 getX() + forwardX, 
-							 getY() + forwardY, 
-							 forwardX * SHOT_SPEED, 
-							 forwardY * SHOT_SPEED);
-		
-		manager.addEntity(shot);
-		if (ScoreState.score >= 10) {
-			shot = new Shot(shotTexture, 
-					 getX() + forwardX, 
-					 getY() + forwardY, 
-					 (float) ((forwardX*Math.cos(defl1) - forwardY*Math.sin(defl1)) * SHOT_SPEED), 
-					 (float) ((forwardX*Math.sin(defl1) + forwardY*Math.cos(defl1)) * SHOT_SPEED));
-			manager.addEntity(shot);
-			shot = new Shot(shotTexture, 
-					 getX() + forwardX, 
-					 getY() + forwardY, 
-					 (float) ((forwardX*Math.cos(defl2) - forwardY*Math.sin(defl2)) * SHOT_SPEED), 
-					 (float) ((forwardX*Math.sin(defl2) + forwardY*Math.cos(defl2)) * SHOT_SPEED));
-			manager.addEntity(shot);
-		}
-		manager.shotFired();
 	}
 	
 	@Override
@@ -115,16 +84,11 @@ public class Player extends AbstractEntity {
 		
 		rotationZ = (float) ((float) -Math.atan2(forwardX, forwardY) * 180 / Math.PI)+180;
 
-		shotTimeout -= delta;
-		if (shotTimeout <= 0){
-			if (Mouse.isButtonDown(0)){
-				//fire(manager);
-				shotTimeout = shotInterval;
-				if (PowerState.selected instanceof ActivePower){
-					PowerState.selected.effect(manager, delta);
-				}
-				
+		if (Mouse.isButtonDown(0)){
+			if (PowerState.selected instanceof ActivePower){
+				PowerState.selected.effect(manager, delta);
 			}
+			
 		}
 		
 	}

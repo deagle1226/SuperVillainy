@@ -74,15 +74,15 @@ public class BattleState implements GameState, EntityManager {
 	/** The current level of play */
 	private int level;
 	/** The timeout for the game over message before resetting to the menu */
-	private int gameOverTimeout;
+	private int gameOverTimeout = 2000; // ms
 	
-	private int num_enenmies;
+	private int num_enemies;
 	
 	/**
 	 * Create a new game state
 	 */
 	public BattleState(int n) {
-		num_enenmies = n;
+		num_enemies = n;
 	}
 
 	@Override
@@ -129,11 +129,11 @@ public class BattleState implements GameState, EntityManager {
 		defineLight();
 		
 		TextureLoader loader = new TextureLoader();
-		background = loader.getTexture("res/bg.jpg");
+		background = loader.getTexture("res/bg.png");
 		shotTexture = loader.getTexture("res/shot.png");
 		
 		playerTexture = loader.getTexture("res/ship.jpg");
-		playerModel = ObjLoader.loadObj("res/ship.obj");
+		playerModel = ObjLoader.loadObj("res/sphere.obj");
 		
 		rockTexture = loader.getTexture("res/rock.jpg");
 		rockModel = ObjLoader.loadObj("res/rock.obj");
@@ -217,13 +217,13 @@ public class BattleState implements GameState, EntityManager {
 		background.bind();
 		
 		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0,0);
-			GL11.glVertex2i(0,0);
 			GL11.glTexCoord2f(0,1);
+			GL11.glVertex2i(0,0);
+			GL11.glTexCoord2f(0,0);
 			GL11.glVertex2i(0,GameWindow.WINDOW_HEIGHT);
-			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,GameWindow.WINDOW_HEIGHT);
 			GL11.glTexCoord2f(1,0);
+			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,GameWindow.WINDOW_HEIGHT);
+			GL11.glTexCoord2f(1,1);
 			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,0);
 		GL11.glEnd();
 		
@@ -232,13 +232,17 @@ public class BattleState implements GameState, EntityManager {
 
 	@Override
 	public void update(GameWindow window, int delta) {
-		if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
-			window.changeToState(StartMenu.NAME);
+		while (Keyboard.next()){
+			if (Keyboard.getEventKeyState()) {
+				if (Keyboard.getEventKey() == Keyboard.KEY_ESCAPE){
+					window.changeToState(StartMenu.NAME);
+				}
+			}
 		}
 		if (gameOver) {
 			gameOverTimeout -= delta;
 			if (gameOverTimeout < 0) {
-				//window.changeToState(MenuState.NAME);
+				window.changeToState(StartMenu.NAME);
 			}
 		}
 		
@@ -281,7 +285,7 @@ public class BattleState implements GameState, EntityManager {
 		entities.add(player);
 		
 		Enemy enemy;
-		for (int i = 0; i < num_enenmies; i++) {
+		for (int i = 0; i < num_enemies; i++) {
 			enemy = new RockEnemy(rockTexture, rockModel, i*2, 10);
 			entities.add(enemy);
 		}
@@ -316,6 +320,9 @@ public class BattleState implements GameState, EntityManager {
 	@Override
 	public void enemyKilled() {
 		ScoreState.score++;
+		if (ScoreState.score == num_enemies){
+			gameOver = true;
+		}
 	}
 
 	@Override

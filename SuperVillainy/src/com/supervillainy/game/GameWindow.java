@@ -21,6 +21,7 @@ public class GameWindow {
 	public final static int WINDOW_RATIO = 17;
 	public final static int FRAME_CAP = 60;
 	public final static float FIELD_OF_VIEW = 45.0f;
+	public final static int AA = 16;
 	
 	private HashMap gameStates = new HashMap();
 	private GameState currentState;
@@ -44,7 +45,7 @@ public class GameWindow {
 			Display.setDisplayMode(mode);
 			Display.setFullscreen(false);
 			
-			Display.create(new PixelFormat(8,0,0,16));
+			Display.create(new PixelFormat(8,0,0,AA));
 			
 			// initialise the game states
 			init();
@@ -102,7 +103,7 @@ public class GameWindow {
 				}
 			}
 		}
-		
+		System.out.println(mode.getWidth() + "x" + mode.getHeight());
 		return mode;
 	}
 	

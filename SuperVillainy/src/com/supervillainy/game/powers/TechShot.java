@@ -22,6 +22,8 @@ public class TechShot extends ShootPower {
 		r = 1.0f;
 		g = 0f;
 		b = 0f;
+		shotInterval = 50;
+		speed = 30;
 	}
 
 	@Override

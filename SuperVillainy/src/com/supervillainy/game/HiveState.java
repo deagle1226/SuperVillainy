@@ -35,7 +35,7 @@ public class HiveState implements GameState {
 	@Override
 	public void init(GameWindow window) throws IOException {
 		TextureLoader loader = new TextureLoader();
-		background = loader.getTexture("res/bg.jpg");
+		background = loader.getTexture("res/bg.png");
 		
 		fontSize = 32;
 		Texture fontTexture = loader.getTexture("res/font.png");
@@ -81,13 +81,13 @@ public class HiveState implements GameState {
 		background.bind();
 		
 		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0,0);
-			GL11.glVertex2i(0,0);
 			GL11.glTexCoord2f(0,1);
+			GL11.glVertex2i(0,0);
+			GL11.glTexCoord2f(0,0);
 			GL11.glVertex2i(0,GameWindow.WINDOW_HEIGHT);
-			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,GameWindow.WINDOW_HEIGHT);
 			GL11.glTexCoord2f(1,0);
+			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,GameWindow.WINDOW_HEIGHT);
+			GL11.glTexCoord2f(1,1);
 			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,0);
 		GL11.glEnd();
 		

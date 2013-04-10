@@ -26,7 +26,7 @@ public class PowerSelectMenu extends MenuGameState {
 			options[i] = PowerState.powers.get(i).getName();
 		}
 		
-		bgPath = "res/bg.jpg";
+		bgPath = "res/bg.png";
 		fontPath = "res/font.png";
 		fontSize = 32;
 		

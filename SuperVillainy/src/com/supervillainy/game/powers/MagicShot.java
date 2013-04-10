@@ -18,6 +18,8 @@ public static final String NAME = "Magic Shot";
 		r = 0f;
 		g = 0f;
 		b = 1f;
+		shotInterval = 250;
+		speed = 30;
 	}
 	
 	@Override

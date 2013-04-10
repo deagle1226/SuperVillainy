@@ -18,6 +18,8 @@ public static final String NAME = "Mutation Shot";
 		r = 0f;
 		g = 1.0f;
 		b = 0f;
+		shotInterval = 150;
+		speed = 40;
 	}
 	
 	@Override

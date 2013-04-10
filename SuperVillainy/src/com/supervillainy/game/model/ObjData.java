@@ -169,12 +169,14 @@ public class ObjData {
 				int v = Integer.parseInt(parts.nextToken());
 				int t = Integer.parseInt(parts.nextToken());
 				int n = Integer.parseInt(parts.nextToken());
+	
 				
 				// we have the indicies we can now just add the point
 				// data to the face.
 				face.addPoint((Tuple3) verts.get(v-1),
 						      (Tuple2) texCoords.get(t-1),
 						      (Tuple3) normals.get(n-1));
+				
 			}
 		} catch (NumberFormatException e) {
 			throw new IOException(e.getMessage());

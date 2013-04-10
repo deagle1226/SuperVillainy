@@ -6,6 +6,8 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.gui.BitmapFont;
+import com.supervillainy.game.gui.Button;
+import com.supervillainy.game.gui.StartMenuButton;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;
 
@@ -16,6 +18,8 @@ public class StartMenu extends MenuGameState {
 	private int EXIT = 3;
 	private int TEST1 = 0;
 	private int TEST2 = 1;
+	
+	Button button;
 
 	@Override
 	public String getName() {
@@ -26,9 +30,11 @@ public class StartMenu extends MenuGameState {
 	public void init(GameWindow window) throws IOException {
 		options = new String[] {"DEBUG_AI", "DEBUG_Battle", "Start Game", "Exit"};
 
-		bgPath = "res/bg.jpg";
+		bgPath = "res/bg.png";
 		fontPath = "res/font.png";
 		fontSize = 32;
+		
+		button = new StartMenuButton("button", 100, 100, 200, 100, "");
 		
 		super.init(window);
 	}
@@ -38,6 +44,9 @@ public class StartMenu extends MenuGameState {
 		menuTitle = "SUPER VILLAINY";
 		
 		super.render(window, delta);
+		window.enterOrtho();
+		button.render(window, delta);
+		window.leaveOrtho();
 	}
 
 	@Override

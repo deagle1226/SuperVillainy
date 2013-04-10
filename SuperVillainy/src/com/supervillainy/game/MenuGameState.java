@@ -33,7 +33,7 @@ public abstract class MenuGameState implements GameState {
 
 	@Override
 	public void render(GameWindow window, int delta) {
-		GL11.glColor3f(0.2f,0.2f,0.3f);
+		GL11.glColor3f(0.8f,0.8f,0.8f);
 		drawBackground(window);
 		
 		window.enterOrtho();
@@ -55,17 +55,17 @@ public abstract class MenuGameState implements GameState {
 	private void drawBackground(GameWindow window) {
 		window.enterOrtho();
 		
+		float scale = 1f;
 		background.bind();
-		
 		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0,0);
-			GL11.glVertex2i(0,0);
 			GL11.glTexCoord2f(0,1);
-			GL11.glVertex2i(0,GameWindow.WINDOW_HEIGHT);
-			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,GameWindow.WINDOW_HEIGHT);
+			GL11.glVertex2f(0,0);
+			GL11.glTexCoord2f(0,0);
+			GL11.glVertex2f(0,GameWindow.WINDOW_HEIGHT*scale);
 			GL11.glTexCoord2f(1,0);
-			GL11.glVertex2i(GameWindow.WINDOW_WIDTH,0);
+			GL11.glVertex2f(GameWindow.WINDOW_WIDTH*scale,GameWindow.WINDOW_HEIGHT*scale);
+			GL11.glTexCoord2f(1,1);
+			GL11.glVertex2f(GameWindow.WINDOW_WIDTH*scale,0);
 		GL11.glEnd();
 		
 		window.leaveOrtho();
@@ -92,9 +92,7 @@ public abstract class MenuGameState implements GameState {
 		}
 	}
 	
-	public void selectOption(GameWindow window) {
-		
-	}
+	public abstract void selectOption(GameWindow window);
 
 	@Override
 	public void enter(GameWindow window) {

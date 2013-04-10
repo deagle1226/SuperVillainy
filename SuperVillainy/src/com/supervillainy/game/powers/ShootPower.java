@@ -12,7 +12,8 @@ import com.supervillainy.game.texture.TextureLoader;
 
 public abstract class ShootPower extends ActivePower {
 
-	private int shotInterval = 250;
+	protected int shotInterval;
+	protected int speed;
 	
 	private int shotTimeout;
 	
@@ -29,14 +30,19 @@ public abstract class ShootPower extends ActivePower {
 
 	@Override
 	public void effect(EntityManager manager, int delta) {
-		Shot shot = new Shot(texture, 
+		shotTimeout -= delta;
+		if (shotTimeout <= 0){
+			shotTimeout = shotInterval;
+			Shot shot = new Shot(texture, 
 				 player.getX() + player.forwardX, 
 				 player.getY() + player.forwardY, 
-				 player.forwardX * player.SHOT_SPEED, 
-				 player.forwardY * player.SHOT_SPEED,
+				 player.forwardX * speed, 
+				 player.forwardY * speed,
 				 r, g, b);
-		manager.addEntity(shot);
-		manager.shotFired();
+			manager.addEntity(shot);
+			manager.shotFired();
+		}
+		
 	}
 
 }

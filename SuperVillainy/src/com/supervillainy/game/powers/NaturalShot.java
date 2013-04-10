@@ -15,9 +15,11 @@ public class NaturalShot extends ShootPower {
 		super.init(loader);
 		
 		hotkey = Keyboard.KEY_1;
-		r = 0f;
-		g = 1.0f;
-		b = 1.0f;
+		r = 1.0f;
+		g = 0f;
+		b = 0f;
+		shotInterval = 350;
+		speed = 20;
 	}
 	
 	@Override
