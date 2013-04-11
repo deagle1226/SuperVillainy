@@ -22,7 +22,7 @@ public class TechShot extends ShootPower {
 		r = 1.0f;
 		g = 0f;
 		b = 0f;
-		shotInterval = 50;
+		shotInterval = 10;
 		speed = 30;
 	}
 
@@ -33,21 +33,31 @@ public class TechShot extends ShootPower {
 	
 	@Override
 	public void effect(EntityManager manager, int delta){
-		super.effect(manager, delta);
-		Shot shot = new Shot(texture, 
+		shotTimeout -= delta;
+		if (shotTimeout <= 0){
+			shotTimeout = shotInterval;
+			Shot shot = new Shot(texture, 
 				 player.getX() + player.forwardX, 
 				 player.getY() + player.forwardY, 
-				 (float) ((player.forwardX*Math.cos(defl2) - player.forwardY*Math.sin(defl2)) * player.SHOT_SPEED), 
-				 (float) ((player.forwardX*Math.sin(defl2) + player.forwardY*Math.cos(defl2)) * player.SHOT_SPEED),
+				 player.forwardX * speed, 
+				 player.forwardY * speed,
 				 r, g, b);
-		manager.addEntity(shot);
-		shot = new Shot(texture, 
-				 player.getX() + player.forwardX, 
-				 player.getY() + player.forwardY, 
-				 (float) ((player.forwardX*Math.cos(defl1) - player.forwardY*Math.sin(defl1))  * player.SHOT_SPEED), 
-				 (float) ((player.forwardX*Math.sin(defl1) + player.forwardY*Math.cos(defl1)) * player.SHOT_SPEED),
-				 r, g, b);
-		manager.addEntity(shot);
+			manager.addEntity(shot);
+			shot = new Shot(texture, 
+					 player.getX() + player.forwardX, 
+					 player.getY() + player.forwardY, 
+					 (float) ((player.forwardX*Math.cos(defl2) - player.forwardY*Math.sin(defl2)) * player.SHOT_SPEED), 
+					 (float) ((player.forwardX*Math.sin(defl2) + player.forwardY*Math.cos(defl2)) * player.SHOT_SPEED),
+					 r, g, b);
+			manager.addEntity(shot);
+			shot = new Shot(texture, 
+					 player.getX() + player.forwardX, 
+					 player.getY() + player.forwardY, 
+					 (float) ((player.forwardX*Math.cos(defl1) - player.forwardY*Math.sin(defl1))  * player.SHOT_SPEED), 
+					 (float) ((player.forwardX*Math.sin(defl1) + player.forwardY*Math.cos(defl1)) * player.SHOT_SPEED),
+					 r, g, b);
+			manager.addEntity(shot);
+		}
 	}
 
 }

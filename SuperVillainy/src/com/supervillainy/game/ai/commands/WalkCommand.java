@@ -6,7 +6,7 @@ import com.supervillainy.game.ai.tasks.WalkTask;
 public class WalkCommand extends Command {
 	
 	public WalkCommand(){
-		importance = 2;
+		importance = 1;
 	}
 
 	@Override

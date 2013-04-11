@@ -1,5 +1,7 @@
 package com.supervillainy.game.ai.tasks;
 
+import com.supervillainy.game.GameWindow;
+
 public class WaitTask implements Task {
 	
 	public static final String NAME = "Waiting";
@@ -11,7 +13,7 @@ public class WaitTask implements Task {
 	@Override
 	public void update() {
 		count++;
-		if (count < 5){
+		if (count > 1 * GameWindow.FRAME_CAP){
 			active = false;
 		}
 	}

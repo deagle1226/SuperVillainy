@@ -15,7 +15,7 @@ public abstract class ShootPower extends ActivePower {
 	protected int shotInterval;
 	protected int speed;
 	
-	private int shotTimeout;
+	protected int shotTimeout;
 	
 	protected float r, g, b;
 
@@ -30,6 +30,7 @@ public abstract class ShootPower extends ActivePower {
 
 	@Override
 	public void effect(EntityManager manager, int delta) {
+		
 		shotTimeout -= delta;
 		if (shotTimeout <= 0){
 			shotTimeout = shotInterval;
@@ -42,7 +43,6 @@ public abstract class ShootPower extends ActivePower {
 			manager.addEntity(shot);
 			manager.shotFired();
 		}
-		
 	}
 
 }

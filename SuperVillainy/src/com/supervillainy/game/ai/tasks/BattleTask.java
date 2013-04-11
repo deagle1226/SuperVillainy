@@ -1,5 +1,7 @@
 package com.supervillainy.game.ai.tasks;
 
+import com.supervillainy.game.GameWindow;
+
 public class BattleTask implements Task {
 	
 	public static final String NAME = "Fighting";
@@ -11,7 +13,7 @@ public class BattleTask implements Task {
 	@Override
 	public void update() {
 		count++;
-		if(count > 600){
+		if(count > 20 * GameWindow.FRAME_CAP){
 			active = false;
 		}
 	}

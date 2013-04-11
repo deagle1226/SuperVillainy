@@ -6,7 +6,7 @@ import com.supervillainy.game.ai.tasks.Task;
 public class BattleCommand extends Command {
 	
 	public BattleCommand(){
-		importance = 1;
+		importance = 2;
 	}
 
 	@Override

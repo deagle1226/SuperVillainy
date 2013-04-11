@@ -73,4 +73,5 @@ public interface Entity {
 	 * @return True if collision is detected.
 	 */
 	public boolean collides(Entity other);
+
 }

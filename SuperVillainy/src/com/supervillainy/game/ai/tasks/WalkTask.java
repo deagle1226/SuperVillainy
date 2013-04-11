@@ -1,5 +1,7 @@
 package com.supervillainy.game.ai.tasks;
 
+import com.supervillainy.game.GameWindow;
+
 public class WalkTask implements Task {
 	
 	public static final String NAME = "Walking";
@@ -11,7 +13,7 @@ public class WalkTask implements Task {
 	@Override
 	public void update() {
 		count++;
-		if(count > 300){
+		if(count > 10 * GameWindow.FRAME_CAP){
 			active = false;
 		}
 	}

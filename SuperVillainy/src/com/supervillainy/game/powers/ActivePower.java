@@ -21,6 +21,8 @@ public abstract class ActivePower implements Power {
 	public void update(EntityManager manager, int delta) {
 		if (Keyboard.isKeyDown(hotkey)){
 			PowerState.selected = this;
+			PowerState.selected.effect(manager, delta);
+			
 		}
 	}
 	

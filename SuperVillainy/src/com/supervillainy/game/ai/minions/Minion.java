@@ -5,10 +5,11 @@ import com.supervillainy.game.ai.Decision;
 
 public abstract class Minion implements AI, Comparable<Minion> {
 	
-	protected Decision decision;
+	private Decision decision;
 	protected int rank;
 	
-	public void update() {
+	public void update(Decision d) {
+		decision = d;
 		decision.update();
 	}
 	
@@ -18,7 +19,7 @@ public abstract class Minion implements AI, Comparable<Minion> {
 	}
 	
 	public String toString() {
-		return this.getClass().getSimpleName() + " is " + decision.task.getName();
+		return decision.task.getName();
 	}
 
 }

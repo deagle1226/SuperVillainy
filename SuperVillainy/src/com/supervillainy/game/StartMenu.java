@@ -33,10 +33,12 @@ public class StartMenu extends MenuGameState {
 		bgPath = "res/bg.png";
 		fontPath = "res/font.png";
 		fontSize = 32;
-		
-		button = new StartMenuButton("button", 100, 100, 200, 100, "");
-		
+				
 		super.init(window);
+		TextureLoader loader = new TextureLoader();
+		addButton(new StartMenuButton("debug_ai", 100, 100, 200, 100, HiveState.NAME));
+		addButton(new StartMenuButton("debug_battle", 100, 200, 200, 100, PowerSelectMenu.NAME));
+		initButtons(font, loader);
 	}
 
 	@Override
@@ -44,9 +46,6 @@ public class StartMenu extends MenuGameState {
 		menuTitle = "SUPER VILLAINY";
 		
 		super.render(window, delta);
-		window.enterOrtho();
-		button.render(window, delta);
-		window.leaveOrtho();
 	}
 
 	@Override

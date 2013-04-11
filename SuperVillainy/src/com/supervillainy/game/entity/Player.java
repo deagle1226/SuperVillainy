@@ -75,8 +75,8 @@ public class Player extends AbstractEntity {
 		int mouseX = Mouse.getX() - GameWindow.WINDOW_WIDTH/2;
 		int mouseY = Mouse.getY() - GameWindow.WINDOW_HEIGHT/2;
 		
-		float dX = mouseX - (positionX*GameWindow.WINDOW_RATIO);
-		float dY = mouseY - (positionY*GameWindow.WINDOW_RATIO);
+		float dX = mouseX - (positionX*(GameWindow.WINDOW_RATIO+1));
+		float dY = mouseY - (positionY*(GameWindow.WINDOW_RATIO+1));
 		
 		float mag = (float) Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2));
 		forwardX = dX/mag;
@@ -85,9 +85,11 @@ public class Player extends AbstractEntity {
 		rotationZ = (float) ((float) -Math.atan2(forwardX, forwardY) * 180 / Math.PI)+180;
 
 		if (Mouse.isButtonDown(0)){
-			if (PowerState.selected instanceof ActivePower){
-				PowerState.selected.effect(manager, delta);
-			}
+			PowerState.powers.get(0).effect(manager, delta);
+			
+//			if (PowerState.selected instanceof ActivePower){
+//				PowerState.selected.effect(manager, delta);
+//			}
 			
 		}
 		
@@ -132,7 +134,7 @@ public class Player extends AbstractEntity {
 
 	@Override
 	public float getSize() {
-		return 1;
+		return 3f;
 	}
 
 	@Override

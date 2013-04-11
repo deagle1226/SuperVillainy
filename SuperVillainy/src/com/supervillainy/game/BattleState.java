@@ -172,7 +172,7 @@ public class BattleState implements GameState, EntityManager {
 		// position the view a way back from the models so we
 		// can see them
 		GL11.glTranslatef(0,0,-50);
-
+		GL11.glEnable(GL11.GL_LIGHTING);
 		// loop through all entities in the game rendering them
 		for (Entity e : entities){
 			e.render();
@@ -286,7 +286,7 @@ public class BattleState implements GameState, EntityManager {
 		
 		Enemy enemy;
 		for (int i = 0; i < num_enemies; i++) {
-			enemy = new RockEnemy(rockTexture, rockModel, i*2, 10);
+			enemy = new RockEnemy(rockTexture, rockModel, -20+i*2, 10);
 			entities.add(enemy);
 		}
 		
@@ -338,6 +338,7 @@ public class BattleState implements GameState, EntityManager {
 	@Override
 	public void shotFired() {
 		//shoot.play(1.0f,0.5f);
+		PowerState.active = false;
 	}
 
 }

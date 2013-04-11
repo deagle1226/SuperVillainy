@@ -3,6 +3,8 @@ package com.supervillainy.game.ai.minions;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+import com.supervillainy.game.ai.Decision;
+
 public class MinionManager {
 	
 	private PriorityQueue<Minion> minions;
@@ -16,9 +18,9 @@ public class MinionManager {
 		minions.add(m);
 	}
 	
-	public void update(){
+	public void update(Decision d){
 		for (Minion m : minions){
-			m.update();
+			m.update(d);
 		}
 		count++;
 		if (count > 60){

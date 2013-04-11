@@ -18,7 +18,7 @@ public class GameWindow {
 	
 	public final static int WINDOW_WIDTH = 1280;
 	public final static int WINDOW_HEIGHT = 720;
-	public final static int WINDOW_RATIO = 17;
+	public final static int WINDOW_RATIO = 16;
 	public final static int FRAME_CAP = 60;
 	public final static float FIELD_OF_VIEW = 45.0f;
 	public final static int AA = 16;
@@ -150,7 +150,7 @@ public class GameWindow {
 		// the asteroids and the player
 		addState(new StartMenu());
 		addState(new PowerSelectMenu());
-		addState(new BattleState(20));
+		addState(new BattleState(30));
 		addState(new HiveState());
 		
 		try {
@@ -243,8 +243,8 @@ public class GameWindow {
 		}
 		
 		currentState.leave(this);
+		newState.enter(this);
 		currentState = newState;
-		currentState.enter(this);
 	}
 	
 	/**

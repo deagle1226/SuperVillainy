@@ -17,7 +17,7 @@ public class Shot extends EffectEntity implements Entity {
 	/** The size of the initial particles building up this shot */
 	private float size = 0.65f;
 	/** The amount of time the shot exists for before disappearing */
-	private int life = 2000;
+	private int life = 5000;
 	/** The particle engine used to render the shot */
 	private ParticleGroup particles;
 
@@ -120,5 +120,4 @@ public class Shot extends EffectEntity implements Entity {
 			manager.removeEntity(this);
 		}
 	}
-
 }

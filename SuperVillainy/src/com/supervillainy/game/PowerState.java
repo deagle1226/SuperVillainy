@@ -10,4 +10,6 @@ public class PowerState {
 	
 	public static Power selected;
 	
+	public static boolean active;
+	
 }

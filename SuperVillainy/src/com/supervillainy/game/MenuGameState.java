@@ -1,11 +1,13 @@
 package com.supervillainy.game;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.gui.BitmapFont;
+import com.supervillainy.game.gui.Button;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;
 
@@ -21,6 +23,8 @@ public abstract class MenuGameState implements GameState {
 	protected int fontSize;
 	
 	protected String menuTitle;
+	
+	private ArrayList<Button> buttons;
 
 	@Override
 	public void init(GameWindow window) throws IOException {
@@ -29,6 +33,7 @@ public abstract class MenuGameState implements GameState {
 		
 		Texture fontTexture = loader.getTexture(fontPath);
 		font = new BitmapFont(fontTexture, fontSize, fontSize);
+		buttons = new ArrayList<Button>();
 	}
 
 	@Override
@@ -47,6 +52,10 @@ public abstract class MenuGameState implements GameState {
 				GL11.glColor3f(1,1,0.3f);
 			}
 			font.drawString(0, options[i], GameWindow.WINDOW_WIDTH/2-200, GameWindow.WINDOW_HEIGHT/2-100+(i*50));
+		}
+		
+		for(Button b : buttons){
+			b.render(window, delta);
 		}
 		
 		window.leaveOrtho();
@@ -90,6 +99,9 @@ public abstract class MenuGameState implements GameState {
 				}
 			}
 		}
+		for (Button b : buttons){
+			b.update(window, delta);
+		}
 	}
 	
 	public abstract void selectOption(GameWindow window);
@@ -100,6 +112,15 @@ public abstract class MenuGameState implements GameState {
 
 	@Override
 	public void leave(GameWindow window) {
+	}
+	
+	public void addButton(Button b){
+		buttons.add(b);
+	}
+	public void initButtons(BitmapFont font, TextureLoader loader) throws IOException {
+		for(Button b : buttons){
+			b.init(font, loader);
+		}
 	}
 
 }
