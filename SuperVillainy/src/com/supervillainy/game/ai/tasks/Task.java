@@ -8,4 +8,6 @@ public interface Task {
 	
 	public String getName();
 	
+	public int getReward();
+	
 }

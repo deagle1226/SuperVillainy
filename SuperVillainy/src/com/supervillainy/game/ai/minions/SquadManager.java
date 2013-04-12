@@ -23,5 +23,9 @@ public class SquadManager {
 	public ArrayList<Squad> getSquads(){
 		return squads;
 	}
+	
+	public void clear(){
+		squads = new ArrayList<Squad>();
+	}
 
 }

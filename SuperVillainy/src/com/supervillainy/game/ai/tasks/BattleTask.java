@@ -28,4 +28,9 @@ public class BattleTask implements Task {
 		return NAME;
 	}
 
+	@Override
+	public int getReward() {
+		return 100;
+	}
+
 }

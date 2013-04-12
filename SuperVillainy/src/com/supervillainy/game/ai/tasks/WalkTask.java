@@ -28,4 +28,9 @@ public class WalkTask implements Task {
 		return NAME;
 	}
 
+	@Override
+	public int getReward() {
+		return 10;
+	}
+
 }

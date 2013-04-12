@@ -28,4 +28,9 @@ public class WaitTask implements Task {
 		return NAME;
 	}
 
+	@Override
+	public int getReward() {
+		return 0;
+	}
+
 }

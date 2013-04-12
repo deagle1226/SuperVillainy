@@ -26,8 +26,6 @@ public class HiveState implements GameState {
 	private BitmapFont font;
 	private int fontSize;
 	
-	//private MinionManager manager;
-	private CommandQueue commands;
 	private SquadManager manager;
 	
 	private int selected;
@@ -47,8 +45,6 @@ public class HiveState implements GameState {
 		font = new BitmapFont(fontTexture, fontSize, fontSize);
 		
 		manager = new SquadManager();
-
-		commands = new CommandQueue();
 		selected = 0;
 	}
 
@@ -63,7 +59,7 @@ public class HiveState implements GameState {
 
 		int i = 0;
 		for (Squad s : manager.getSquads()){
-			String str = "Squad" + i + " ";
+			String str = "Squad" + i + ": " + s.getDecision().task.getName() + " -> ";
 			for (Minion m : s.getMinions()){
 				str += m.toString() + " ";
 			}
@@ -148,6 +144,7 @@ public class HiveState implements GameState {
 
 	@Override
 	public void leave(GameWindow window) {
+		manager.clear();
 	}
 
 }

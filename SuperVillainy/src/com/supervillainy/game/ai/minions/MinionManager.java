@@ -18,9 +18,10 @@ public class MinionManager {
 		minions.add(m);
 	}
 	
-	public void update(Decision d){
+	public void update(){
+		levelUp();
 		for (Minion m : minions){
-			m.update(d);
+			m.update();
 		}
 		count++;
 		if (count > 60){
@@ -30,6 +31,21 @@ public class MinionManager {
 	
 	public PriorityQueue<Minion> getMinions(){
 		return minions;
+	}
+	
+	public void levelUp(){
+		String str = "";
+		PriorityQueue<Minion> temp = new PriorityQueue<Minion>();
+		for (Minion m : minions){
+			str += m.experience + " ";
+			if (m.experience >= m.getXpCap()){
+				temp.add(m.nextRank());
+			} else {
+				temp.add(m);
+			}
+		}
+		System.out.println(str);
+		minions = temp;
 	}
 
 }

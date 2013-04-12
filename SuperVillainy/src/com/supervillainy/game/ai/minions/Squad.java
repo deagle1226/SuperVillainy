@@ -20,7 +20,7 @@ public class Squad {
 	public Squad() {
 		manager = new MinionManager();
 		commands = new CommandQueue();
-		decision = new Decision(commands);
+		decision = new Decision(commands, this);
 	}
 	
 	public void add(Minion m){
@@ -36,7 +36,8 @@ public class Squad {
 	}
 	
 	public void update() {
-		manager.update(decision);
+		manager.update();
+		decision.update();
 	}
 	
 	public void command(Command c){
@@ -45,6 +46,16 @@ public class Squad {
 	
 	public CommandQueue getCommands(){
 		return commands;
+	}
+	
+	public void addXp(int xp){
+		for (Minion m : manager.getMinions()){
+			m.addXp(xp);
+		}
+	}
+	
+	public Decision getDecision(){
+		return decision;
 	}
 
 }
