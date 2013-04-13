@@ -27,5 +27,12 @@ public class SquadManager {
 	public void clear(){
 		squads = new ArrayList<Squad>();
 	}
+	
+	public void moveMinion(Minion m, int origin, int target){
+		if (!squads.get(target).isFull()){
+			squads.get(target).add(m);
+			squads.get(origin).remove(m);
+		}
+	}
 
 }

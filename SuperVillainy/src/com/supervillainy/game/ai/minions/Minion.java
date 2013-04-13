@@ -34,7 +34,7 @@ public abstract class Minion implements AI, Comparable<Minion> {
 	
 	@Override
 	public int compareTo(Minion m) {
-		return Double.compare(rank, m.rank);
+		return -Double.compare(rank, m.rank);
 	}
 	
 	public String toString() {

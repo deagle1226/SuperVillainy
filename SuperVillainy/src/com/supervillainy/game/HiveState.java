@@ -59,7 +59,7 @@ public class HiveState implements GameState {
 
 		int i = 0;
 		for (Squad s : manager.getSquads()){
-			String str = "Squad" + i + ": " + s.getDecision().task.getName() + " -> ";
+			String str = "Squad" + (i+1) + ": " + s.getDecision().task.getName() + " -> ";
 			for (Minion m : s.getMinions()){
 				str += m.toString() + " ";
 			}
@@ -101,9 +101,9 @@ public class HiveState implements GameState {
 		manager.update();
 		while (Keyboard.next()){
 			if (Keyboard.getEventKeyState()){
-				if (Keyboard.getEventKey() == Keyboard.KEY_1){
+				if (Keyboard.getEventKey() == Keyboard.KEY_Q){
 					manager.getSquads().get(selected).command(new BattleCommand());
-				} else if (Keyboard.getEventKey() == Keyboard.KEY_2){
+				} else if (Keyboard.getEventKey() == Keyboard.KEY_W){
 					manager.getSquads().get(selected).command(new WalkCommand());
 				} else if (Keyboard.getEventKey() == Keyboard.KEY_ESCAPE) {
 					window.changeToState(StartMenu.NAME);
@@ -117,6 +117,12 @@ public class HiveState implements GameState {
 					if (selected<0){
 						selected = manager.getSquads().size()-1;
 					}
+				} else if (Keyboard.getEventKey() == Keyboard.KEY_1) {
+					manager.moveMinion(manager.getSquads().get(selected).getMinions().peek(), selected, 0);
+				} else if (Keyboard.getEventKey() == Keyboard.KEY_2) {
+					manager.moveMinion(manager.getSquads().get(selected).getMinions().peek(), selected, 1);
+				} else if (Keyboard.getEventKey() == Keyboard.KEY_3) {
+					manager.moveMinion(manager.getSquads().get(selected).getMinions().peek(), selected, 2);
 				}
 			}
 		}

@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.supervillainy.game.gui.BitmapFont;
 import com.supervillainy.game.gui.Button;
 import com.supervillainy.game.gui.StartMenuButton;
+import com.supervillainy.game.model.shapes.Rect;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;
 
@@ -19,7 +20,7 @@ public class StartMenu extends MenuGameState {
 	private int TEST1 = 0;
 	private int TEST2 = 1;
 	
-	Button button;
+	StartMenuButton button;
 
 	@Override
 	public String getName() {

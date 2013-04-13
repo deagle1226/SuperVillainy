@@ -16,16 +16,21 @@ public class Squad {
 	private MinionManager manager;
 	private Decision decision;
 	private CommandQueue commands;
+	private boolean full;
 	
 	public Squad() {
 		manager = new MinionManager();
 		commands = new CommandQueue();
 		decision = new Decision(commands, this);
+		full = false;
 	}
 	
 	public void add(Minion m){
 		if (manager.getMinions().size() < SIZE){
 			manager.add(m);
+			if (manager.getMinions().size() == SIZE){
+				full = true;
+			}
 		} else {
 			System.out.println("squad is full");
 		}
@@ -56,6 +61,19 @@ public class Squad {
 	
 	public Decision getDecision(){
 		return decision;
+	}
+	
+	public void remove(Minion m){
+		if (manager.getMinions().contains(m)){
+			manager.getMinions().remove(m);
+			if (manager.getMinions().size() < SIZE){
+				full = false;
+			}
+		}	
+	}
+	
+	public boolean isFull(){
+		return full;
 	}
 
 }

@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.supervillainy.game.GameWindow;
-import com.supervillainy.game.HiveState;
 import com.supervillainy.game.texture.Texture;
 import com.supervillainy.game.texture.TextureLoader;
 
@@ -33,12 +32,11 @@ public abstract class Button {
 	}
 	
 	public void render(GameWindow window, int delta) {	
-		
-		
+		//window.enterOrtho();
 		// draw quad
 		background.bind();
 		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glColor3f(1f,1f,1f);
+		GL11.glColor3f(color,color,color);
 			GL11.glTexCoord2f(0,1);
 			GL11.glVertex2i(x,y);
 			GL11.glTexCoord2f(1,1);
@@ -51,6 +49,7 @@ public abstract class Button {
 		
 		GL11.glColor3f(color,color,color);
 		font.drawString(0, text, x, y);
+		//window.leaveOrtho();
 		
 	}
 	
